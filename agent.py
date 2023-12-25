@@ -101,6 +101,9 @@ def train():
     max_score = 0
     agent = Agent()
     game = SnakeGame()
+
+    total_score = 0
+
     while True:
         old_state = agent.get_state(game)
         action = agent.get_action(old_state)
@@ -117,6 +120,19 @@ def train():
             if score > max_score:
                 max_score = score
                 agent.model.save()
+
+            total_score += score
+            mean_score = total_score / agent.number_of_games
+            print(
+                "Game",
+                agent.number_of_games,
+                "Score",
+                score,
+                "Record",
+                max_score,
+                "Mean Score",
+                mean_score,
+            )
 
 
 if __name__ == "__main__":
